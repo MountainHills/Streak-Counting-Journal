@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Kufam:wght@500&family=Lato:wght@700&display=swap');
 
+:root {
+    --header-color: #DA0037;
+    --menu-odd-color: #444444;
+    --menu-even-color: #171717;
+    --paragraph-color: #EDEDED;
+    --content-container-color: #F8E4E2;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,38 +18,76 @@ body {
     font-family: Lato, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    background-color: #2F6E8D;
+    color: var(--paragraph-color);
 }
 
 /*Navigation*/
-header {
-
-}
-
-header, footer {
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    width: 100%;
-    height: 5vh;
-    text-align: center;
-    background-color: green;
-}
 
 /* Maint Content */
 #page-wrapper {
 	display: grid;
 	height: 100vh;
 	grid-template-columns: 2fr 8fr;
+    grid-template-rows: 5% 95%;
+    grid-template-areas: 
+    "header header"
+    "menu content";
     justify-content: center;
     align-items: center;
 }
 
+header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: var(--header-color);
+    z-index: 1;
+    box-shadow: 5px 5px 18px #888888
+}
+
+header p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header a {
+    text-decoration: none;
+    color: var(--paragraph-color);
+}
+
 .menu-bar {
-	height: 100vh;
-	background-color: red;
+    grid-area: menu;
+	height: 100%;
+    display: grid;
+    grid-template-rows:repeat(3, 1fr);
+	background-color: var(--menu-even-color);
+    z-index: 2;
+    box-shadow: 8px 5px 18px #888888
+}
+
+.menu-pages {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-bar > div:nth-child(odd){
+  background-color: var(--menu-odd-color);
 }
 
 .main-content {
-	height: 100vh;
-	background-color: blue;
+    grid-area: content;
+	height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--menu-even-color);
+	background-color: var(--content-container-color);
+    z-index: 0;
 }
