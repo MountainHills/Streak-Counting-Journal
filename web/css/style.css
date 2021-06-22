@@ -5,7 +5,10 @@
     --menu-odd-color: #444444;
     --menu-even-color: #171717;
     --paragraph-color: #EDEDED;
-    --content-container-color: #F8E4E2;
+    --content-container-color: #F0F2F5;
+    --form-color: #F8E4E2;
+    /*--content-container-color: #F8E4E2;*/
+    /*--form-color: #F0F2F5;*/
 }
 
 * {
@@ -46,7 +49,7 @@ header a {
 #login-page-wrapper {
     display: grid;
     height: 100vh;
-    grid-template-columns: 6fr 5fr;
+    grid-template-columns: 6fr 4fr;
     grid-template-rows: 5% 95%;
     grid-template-areas: 
     "header header"
@@ -58,37 +61,75 @@ header a {
     grid-area: info;
     background-color: greenyellow;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-grid-container {
+    grid-area: form;
+    /*background-color: lightblue;*/
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .form-container {
-    grid-area: form;
-    background-color: lightblue;
+    background-color: var(--form-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 60%;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px -7px black;
 }
 
 .form-container form {
-    background-color: orangered;
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto;
-    width: auto;
 }
 
-input {
-  width: 95%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+input[type=text], input[type=password] {
+width: 95%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+font-size: 16px;
+}
+
+hr {
+    align: center;
+    width: 80%;
+    margin: 10px 0px;
+}
+
+.button, .button-form  {
+    background-color: var(--menu-even-color);
+    width: 85%;
+    border: none;
+    color: white;
+    padding: 15px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.button-form {
+    width: 95%;
+    background-color: var(--menu-odd-color);
 }
 
 /*CSS for Main Content*/
@@ -120,6 +161,10 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.icons {
+    width: 30%;
 }
 
 .menu-bar > div:nth-child(odd){
