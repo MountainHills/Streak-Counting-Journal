@@ -59,12 +59,23 @@ header a {
 
 .information {
     grid-area: info;
-    background-color: greenyellow;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.information h1 {
+    font-size: 6em;
+    margin-bottom: 20px;
+}
+
+.information p {
+    font-size: 1em;
+    width: 60%;
+    text-align: center;
+}
+
 
 .form-grid-container {
     grid-area: form;
@@ -175,9 +186,50 @@ hr {
     grid-area: content;
 	height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: var(--menu-even-color);
 	background-color: var(--content-container-color);
     z-index: 0;
+}
+
+.main-information {
+    display: grid;
+    height: 60%;
+    width: 60%;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows:repeat(3, 1fr);
+    grid-template-areas:
+    "streak streak"
+    "time time"
+    "streak-attempt streak-best";
+}
+
+#streak {
+    grid-area: streak;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#time {
+    grid-area: time;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#streak-attempt {
+    grid-area: streak-attempt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#streak-best {
+    grid-area: streak-best;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
