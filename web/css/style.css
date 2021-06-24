@@ -123,7 +123,7 @@ hr {
     margin: 10px 0px;
 }
 
-.button, .button-form  {
+.button, .button-form, .button-start-end  {
     background-color: var(--menu-even-color);
     width: 85%;
     border: none;
@@ -167,6 +167,7 @@ hr {
 }
 
 .menu-pages {
+    position: relative;
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -181,6 +182,21 @@ hr {
 .menu-bar > div:nth-child(odd){
   background-color: var(--menu-odd-color);
 }
+
+.menu-bar > div:nth-child(odd):hover, .menu-pages:hover{
+  background-color: grey;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.link-spanner{
+  position:absolute; 
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
+  z-index: 1;
+} 
 
 .main-content {
     grid-area: content;
@@ -200,36 +216,40 @@ hr {
     width: 60%;
     grid-template-columns: repeat(2,1fr);
     grid-template-rows:repeat(3, 1fr);
+    border: 1px solid var(--menu-even-color);
     grid-template-areas:
     "streak streak"
     "time time"
     "streak-attempt streak-best";
 }
 
-#streak {
-    grid-area: streak;
+#streak, #time, #streak-attempt, #streak-best {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid var(--menu-even-color);
+}
+
+#streak {
+    grid-area: streak;
+    font-size: 10em;
+    font-weight: bold;
 }
 
 #time {
-    grid-area: time;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    grid-area: time;=
 }
 
 #streak-attempt {
     grid-area: streak-attempt;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #streak-best {
     grid-area: streak-best;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.button-start-end {
+    margin-top: 30px;
+    width: 55%;
+    background-color: var(--menu-odd-color);
 }
