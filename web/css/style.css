@@ -253,3 +253,9 @@ hr {
     width: 55%;
     background-color: var(--menu-odd-color);
 }
+
+/*Table CSS*/
+
+td, th {
+    text-align: center;
+}

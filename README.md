@@ -53,6 +53,6 @@ TODO: Fill this section up with links and resources that helped you create this 
 
 ## Author
 
-- Website - [Anton Bondoc](antonbondoc.wordpress.com)
+- Website - [Anton Bondoc](https://antonbondoc.wordpress.com/)
 - Twitter - [@BonBondocers](https://twitter.com/bonbondocers)
 - LinkedIn - [Anton Bondoc](https://www.linkedin.com/in/anton-bondoc-7231a71b5/)
