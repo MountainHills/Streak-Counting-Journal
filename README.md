@@ -32,7 +32,8 @@ TODO: Add pictures of the project once finished.
 
 - HTML
 - CSS
-- Bootstrap
+- JavaScript
+- JQuery
 - JSP
 - JDBC
 - Servlet
