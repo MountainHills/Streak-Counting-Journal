@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
+     <link rel="icon" href="icon_path" type="image/icon type">
     <title>Index Page for Web Application</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
         <!-- Header -->
         <header>
             <p></p>
-            <p><a href="login.html">Logout</a></p>
+            <p><a href="login">Logout</a></p>
         </header>
 
         <!-- Menu Bar -->
@@ -21,14 +22,14 @@
             <div class="menu-pages">
                  <img class="icons" src="icons/timer.png" alt="Timer Icon"> 
                  <p>Timer</p>
-                 <a href="index.html">
+                 <a href="index">
                     <span class="link-spanner"></span>
                 </a>
             </div>
             <div class="menu-pages">
                 <img class="icons" src="icons/table.png" alt="Table Icon"> 
                 <p>Streak Records</p>
-                <a href="records.html">
+                <a href="records">
                     <span class="link-spanner"></span>
                 </a>
             </div>
@@ -51,7 +52,7 @@
                 <section id="streak-best"> Streak # 1: 90 Days</section>
             </div>
 
-            <a href="register.html" class="button-start-end">Start End Streak</a>
+            <a href="register.jsp" class="button-start-end">Start End Streak</a>
         </main>
     </div>
 

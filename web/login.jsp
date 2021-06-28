@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <title>Registration Page for Web Application</title>
+    <title>NoFap Journal</title>
 </head>
 <body>
     <div id="login-page-wrapper">
@@ -21,23 +21,17 @@
 
         <div class="form-grid-container">
             <div class="form-container">
-                <form action="./goSomewhere" method="post">
-                    <input type="text" name="username" placeholder="Username"><br>
+                <form action="<%= request.getContextPath() %>/LoginServlet" method="post">
+                    <input type="text" name="usernameLogin" placeholder="Username"><br>
 
-                    <input type="password" name="password" placeholder="Password"><br>
+                    <input type="password" name="passwordLogin" placeholder="Password"><br>
 
-                    <input type="password" name="confirmPassword" placeholder="Confirm Password"><br>
-
-                    <p>TODO: Place CAPTCHA here!</p>
-
-                    <input type="text" name="captcha" placeholder="Enter Captcha"><br>
-                    
-                    <input class="button-form" type="submit" value="Register">  
+                    <input class="button-form" type="submit" value="Log In">  
                 </form>
 
                 <hr>
 
-                <a href="login.html" class="button">Already have an Account</a>
+                <a href="register" class="button">Create New Account</a>
             </div>
         </div>        
     </div>

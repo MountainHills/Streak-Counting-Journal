@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <title>NoFap Journal</title>
+    <title>Registration Page for Web Application</title>
 </head>
 <body>
     <div id="login-page-wrapper">
@@ -26,12 +26,18 @@
 
                     <input type="password" name="password" placeholder="Password"><br>
 
-                    <input class="button-form" type="submit" value="Log In">  
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password"><br>
+
+                    <p>TODO: Place CAPTCHA here!</p>
+
+                    <input type="text" name="captcha" placeholder="Enter Captcha"><br>
+                    
+                    <input class="button-form" type="submit" value="Register">  
                 </form>
 
                 <hr>
 
-                <a href="register.html" class="button">Create New Account</a>
+                <a href="login" class="button">Already have an Account</a>
             </div>
         </div>        
     </div>
