@@ -95,11 +95,13 @@ public class LoginServlet extends HttpServlet {
             }
             else
             {
+                response.sendRedirect("login");
                 // TODO: The password is incorrect error handling.
             }
         }
         else 
         {
+            response.sendRedirect("login");
             // TODO: The username doesn't exist error handling.
         }  
     }

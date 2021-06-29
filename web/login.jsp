@@ -22,9 +22,9 @@
         <div class="form-grid-container">
             <div class="form-container">
                 <form action="<%= request.getContextPath() %>/LoginServlet" method="post">
-                    <input type="text" name="usernameLogin" placeholder="Username"><br>
+                    <input type="text" name="usernameLogin" placeholder="Username" required><br>
 
-                    <input type="password" name="passwordLogin" placeholder="Password"><br>
+                    <input type="password" name="passwordLogin" placeholder="Password" required><br>
 
                     <input class="button-form" type="submit" value="Log In">  
                 </form>

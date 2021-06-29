@@ -21,16 +21,17 @@
 
         <div class="form-grid-container">
             <div class="form-container">
-                <form action="./goSomewhere" method="post">
-                    <input type="text" name="username" placeholder="Username"><br>
+                <form action="<%= request.getContextPath() %>/RegisterServlet" method="post">
+                    <input type="text" name="usernameRegister" placeholder="Username" required><br>
 
-                    <input type="password" name="password" placeholder="Password"><br>
+                    <input type="password" name="passwordRegister" placeholder="Password" required><br>
 
-                    <input type="password" name="confirmPassword" placeholder="Confirm Password"><br>
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password" required><br>
 
-                    <p>TODO: Place CAPTCHA here!</p>
-
-                    <input type="text" name="captcha" placeholder="Enter Captcha"><br>
+                    <!-- CAPTCHA Created-->
+                    <img src="<%= request.getContextPath() %>/SimpleCaptchaServlet" >
+                    
+                    <input type="text" name="captcha" placeholder="Enter Captcha" required><br>
                     
                     <input class="button-form" type="submit" value="Register">  
                 </form>

@@ -10,12 +10,22 @@
     <title>Index Page for Web Application</title>
 </head>
 <body>
+    <%
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // New HTTP
+        response.setHeader("Pragma", "no-cache"); // Older HTTP
+        response.setHeader("Expires", "0"); // Proxy Servers
+       
+        if(session.getAttribute("user") == null)
+        {
+            response.sendRedirect("login");
+        }
+    %>
     <div id="page-wrapper">
 
         <!-- Header -->
         <header>
             <p></p>
-            <p><a href="login">Logout</a></p>
+            <p><a href="<%= request.getContextPath() %>/LogoutServlet">Logout</a></p>
         </header>
 
         <!-- Menu Bar -->
