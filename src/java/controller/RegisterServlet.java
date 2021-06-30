@@ -1,14 +1,11 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,61 +20,58 @@ public class RegisterServlet extends HttpServlet {
     
     public void init(ServletConfig config) throws ServletException {
         super.init(config); 
-        try 
-        {
-            // Accessing the database.
-            Class.forName(config.getInitParameter("jdbcClassName"));
-            String username = config.getInitParameter("dbUserName");
-            String password = config.getInitParameter("dbPassword");
-            StringBuffer url = new StringBuffer(config.getInitParameter("jdbcDriverURL")).append("://")
-                .append(config.getInitParameter("dbHostName"))
-                .append(":")
-                .append(config.getInitParameter("dbPort"))
-                .append("/")
-                .append(config.getInitParameter("databaseName"));
-            con = DriverManager.getConnection(url.toString(),username,password);         
-        } 
-        catch (Exception e) {
-            //  The database does not exist.
-            e.printStackTrace();
-        }
+        
+        con = DBConnector.getConnection();
     }
         
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: Get the parameters from register.jsp
+        // Get the parameters from register.jsp
         String username = request.getParameter("usernameRegister").trim();
         String password = request.getParameter("passwordRegister");
         String confirmPassword = request.getParameter("confirmPassword");
         
-        // TODO: Check whether the parameters are all filled.
+        // Checks whether the parameters are all filled.
         if (username.equals("") || password.equals("") || confirmPassword.equals(""))
         {
             // TODO: Create an error handling page for empty forms.
             System.out.println("Enter complete parameters.");
         }
         
+        // TODO: Create an error handling page for empty forms.
+        // Check if password and confirmPassword matches
+        if (!password.equals(confirmPassword)) throw new IOException();
+        
         // Declare variables to check the record size.
         int recordSize = 1;
         
         try
         { 
-            PreparedStatement pstmtRecord = con.prepareStatement("SELECT USERNAME FROM USERS");
-            ResultSet rs = pstmtRecord.executeQuery();
+            PreparedStatement pstmtUsernames = con.prepareStatement("SELECT USERNAME FROM USERS");
+            PreparedStatement pstmtUserRecords = con.prepareStatement("SELECT COUNT(*) FROM USERS");
             
-            while (rs.next())
+            ResultSet recordsUsernames = pstmtUsernames.executeQuery();
+            ResultSet recordsAllUsers = pstmtUserRecords.executeQuery();
+            
+            // Gets the number of records in the USERS table.
+            while (recordsAllUsers.next())
             {
-                // Checks whether the username from register.jsp is unique.
-                if (username.equals(rs.getString("USERNAME")))
-                {
-                    // TODO: Throw if the username is not unique!
-                }
-                // Sets the record size.
-                if (rs.isLast())
-                {
-                    recordSize = rs.getRow();
-                }
+                recordSize = recordsAllUsers.getInt(1);
             }
+            
+            ArrayList<String> usernameList = new ArrayList<>();
+            while (recordsUsernames.next())
+            {
+                usernameList.add(recordsUsernames.getString("USERNAME"));
+            }
+            
+            // Checks the username from register.jsp if it is unique.
+            if (usernameList.contains(username)) throw new NullPointerException();
+            
+            pstmtUsernames.close();
+            pstmtUserRecords.close();
+            pstmtUsernames.close();
+            pstmtUserRecords.close();
         }
         catch (SQLException sqle) 
         {
@@ -89,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
         Captcha captcha = (Captcha) session.getAttribute(Captcha.NAME);  
         request.setCharacterEncoding("UTF-8");  
         String captchaAnswer = request.getParameter("captcha");
-        
+              
         if (captcha.isCorrect(captchaAnswer))
         {
             try 
@@ -115,7 +109,11 @@ public class RegisterServlet extends HttpServlet {
             {
                 sqle.printStackTrace();
             }
-        } 
+        }
+        else {
+            // TODO: Create error handling for incorrect CAPTCHA.
+            System.out.println("Incorrect CAPTCHA. Try again.");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,24 +20,8 @@ public class LoginServlet extends HttpServlet {
     
     public void init(ServletConfig config) throws ServletException {
         super.init(config); 
-        try 
-        {
-            // Accessing the database.
-            Class.forName(config.getInitParameter("jdbcClassName"));
-            String username = config.getInitParameter("dbUserName");
-            String password = config.getInitParameter("dbPassword");
-            StringBuffer url = new StringBuffer(config.getInitParameter("jdbcDriverURL")).append("://")
-                .append(config.getInitParameter("dbHostName"))
-                .append(":")
-                .append(config.getInitParameter("dbPort"))
-                .append("/")
-                .append(config.getInitParameter("databaseName"));
-            con = DriverManager.getConnection(url.toString(),username,password);         
-        } 
-        catch (Exception e) {
-            //  The database does not exist.
-            e.printStackTrace();
-        }
+        
+        con = DBConnector.getConnection();
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -64,6 +47,9 @@ public class LoginServlet extends HttpServlet {
                 usernameList.add(userRecords.getString("USERNAME"));
                 passwordList.add(userRecords.getString("PASSWORD"));
             }
+            
+            userRecords.close();
+            pstmtUsers.close();
             
         } 
         catch (SQLException sqle) 
