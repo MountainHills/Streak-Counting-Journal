@@ -10,18 +10,6 @@
     <title>Index Page for Web Application</title>
 </head>
 <body>
-    <%
-        // Session Management Code Segment
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // New HTTP
-        response.setHeader("Pragma", "no-cache"); // Older HTTP
-        response.setHeader("Expires", "0"); // Proxy Servers
-       
-        if(session.getAttribute("user") == null)
-        {
-            response.sendRedirect("login");
-        }
-    %>
-    
     <div id="page-wrapper">
 
         <!-- Header -->
@@ -69,15 +57,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+<!--                 <tr>
                     <th scope="row">1</th>
                     <td>Mark</td>
                     <td>Otto</td>
-                    <td>@mdo</td></tr>
+                    <td>@mdo</td></tr> -->
                <!--  <tr>
-                    <th scope="row">2 This is Attempt #</th>
-                    <td>Jacob Start of Streak</td>
-                    <td>Thornton End of Streak</td>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
                     <td>@fat</td></tr>
                 <tr>
                     <th scope="row">3</th>
