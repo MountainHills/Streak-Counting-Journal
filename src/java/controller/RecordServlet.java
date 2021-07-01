@@ -21,7 +21,7 @@ public class RecordServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException {
-       
+       // TODO: Set the values for the Records model to be used by records.jsp
     }
 
     @Override

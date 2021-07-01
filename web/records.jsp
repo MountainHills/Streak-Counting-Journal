@@ -20,6 +20,8 @@
         {
             response.sendRedirect("login");
         }
+        
+        // TODO: Enter the lists here, so it would be looped to give information to the table!
     %>
     
     <div id="page-wrapper">
