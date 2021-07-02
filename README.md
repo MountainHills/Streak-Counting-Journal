@@ -20,7 +20,7 @@ This is a passion project dedicated to those who are trying to overcome their ad
 
 ### Description
 
-I would not be using Spring MVC in this web application. I want to try something different.
+A short addiction journal. I may add some features soon.
 
 ### Screenshot
 
