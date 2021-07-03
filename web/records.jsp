@@ -10,18 +10,37 @@
     <title>Index Page for Web Application</title>
 </head>
 <body>
+    <%@ page import="model.Records, java.util.ArrayList, java.util.Arrays" %>
     <%
         // Session Management Code Segment
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // New HTTP
         response.setHeader("Pragma", "no-cache"); // Older HTTP
         response.setHeader("Expires", "0"); // Proxy Servers
        
-        if(session.getAttribute("user") == null)
+        if (session.getAttribute("user") == null)
         {
             response.sendRedirect("login");
         }
         
-        // TODO: Enter the lists here, so it would be looped to give information to the table!
+        if (session.getAttribute("records") == null)
+        {
+            response.sendRedirect("RecordServlet");
+        }
+        
+        int userIndex = Integer.parseInt(session.getAttribute("userIndex").toString());
+        
+        Records records = new Records(userIndex);
+        ArrayList<Integer> attempts = records.getAttempts();
+        ArrayList<String> streakStart = records.getStreakStart();
+        ArrayList<String> streakEnd = records.getStreakEnd();
+        ArrayList<Integer> days = records.getDays();
+        
+        System.out.println(userIndex);
+        
+        System.out.println(Arrays.toString(attempts.toArray()));
+        System.out.println(Arrays.toString(streakStart.toArray()));
+        System.out.println(Arrays.toString(streakEnd.toArray()));
+        System.out.println(Arrays.toString(days.toArray()));
     %>
     
     <div id="page-wrapper">
@@ -71,21 +90,14 @@
                 </tr>
                 </thead>
                 <tbody>
+                <% for (int i = 0; i < attempts.size(); i++) { %>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td></tr>
-               <!--  <tr>
-                    <th scope="row">2 This is Attempt #</th>
-                    <td>Jacob Start of Streak</td>
-                    <td>Thornton End of Streak</td>
-                    <td>@fat</td></tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td></tr> -->
+                    <th scope="row"><%out.print(attempts.get(i));%></th>
+                    <td><%out.print(streakStart.get(i)); %></td>
+                    <td><%out.print(streakEnd.get(i)); %></td>
+                    <td><%out.print(days.get(i)); %></td>
+                </tr>
+                <% } %>
                 </tbody>
             </table>
         </main>
