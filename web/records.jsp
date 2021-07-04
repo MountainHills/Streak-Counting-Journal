@@ -27,20 +27,23 @@
             response.sendRedirect("RecordServlet");
         }
         
-        int userIndex = Integer.parseInt(session.getAttribute("userIndex").toString());
-        
-        Records records = new Records(userIndex);
+        Records records = new Records();
         ArrayList<Integer> attempts = records.getAttempts();
         ArrayList<String> streakStart = records.getStreakStart();
         ArrayList<String> streakEnd = records.getStreakEnd();
         ArrayList<Integer> days = records.getDays();
         
-        System.out.println(userIndex);
+        System.out.println("The size of attempts is: " +  attempts.size());
+        System.out.println("The size of start streak is: " + streakStart.size());
+        System.out.println("The size of end streak is: " + streakEnd.size());
+        System.out.println("The size of days is: " + days.size());
         
-        System.out.println(Arrays.toString(attempts.toArray()));
-        System.out.println(Arrays.toString(streakStart.toArray()));
-        System.out.println(Arrays.toString(streakEnd.toArray()));
-        System.out.println(Arrays.toString(days.toArray()));
+//        System.out.println(Arrays.toString(attempts.toArray()));
+//        System.out.println("The shit below isn't working!");
+//        System.out.println(Arrays.toString(streakStart.toArray()));
+//        System.out.println(Arrays.toString(streakEnd.toArray()));
+//        System.out.println(Arrays.toString(days.toArray()));
+        
     %>
     
     <div id="page-wrapper">
@@ -97,7 +100,10 @@
                     <td><%out.print(streakEnd.get(i)); %></td>
                     <td><%out.print(days.get(i)); %></td>
                 </tr>
-                <% } %>
+                <% } 
+                
+                // Finished using.
+                records = null; %>
                 </tbody>
             </table>
         </main>

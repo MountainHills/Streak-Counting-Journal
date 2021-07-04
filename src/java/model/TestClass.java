@@ -42,21 +42,25 @@ public class TestClass {
 
         System.out.println(days);
         
-        Records records = new Records(0);
+        Records records = new Records();
         ArrayList<Integer> attempts = records.getAttempts();
         ArrayList<String> streakStart = records.getStreakStart();
         ArrayList<String> streakEnd = records.getStreakEnd();
         ArrayList<Integer> daysList = records.getDays();
         
-//        System.out.println(Arrays.toString(attempts.toArray()));
-//        System.out.println(Arrays.toString(streakStart.toArray()));
-//        System.out.println(Arrays.toString(streakEnd.toArray()));
-//        System.out.println(Arrays.toString(daysList.toArray()));
+//        System.out.println(attempts.size());
+//        System.out.println(streakStart.size());
+//        System.out.println(streakEnd.size());
+//        System.out.println(days.size());
         
-        System.out.println(attempts.get(0));
-        System.out.println(streakStart.get(0));
-        System.out.println(streakEnd.get(0));
-        System.out.println(daysList.get(0));
+//        records.close();
+        
+//        System.out.println(attempts.get(0));
+//        System.out.println(streakStart.get(0));
+//        System.out.println(streakEnd.get(0));
+//        System.out.println(daysList.get(0));
+        
+        
         
     }
     

@@ -16,6 +16,7 @@
        
         if(session.getAttribute("user") == null)
         {
+            session.setAttribute("records", null);
             response.sendRedirect("login");
         }
     %>
@@ -39,7 +40,7 @@
             <div class="menu-pages">
                 <img class="icons" src="icons/table.png" alt="Table Icon"> 
                 <p>Streak Records</p>
-                <a href="records">
+                <a href="<%= request.getContextPath() %>/RecordServlet">
                     <span class="link-spanner"></span>
                 </a>
             </div>
