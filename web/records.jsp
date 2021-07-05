@@ -100,10 +100,7 @@
                     <td><%out.print(streakEnd.get(i)); %></td>
                     <td><%out.print(days.get(i)); %></td>
                 </tr>
-                <% } 
-                
-                // Finished using.
-                records = null; %>
+                <% } %>
                 </tbody>
             </table>
         </main>

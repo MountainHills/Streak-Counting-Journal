@@ -213,7 +213,7 @@ hr {
 .main-information {
     display: grid;
     height: 60%;
-    width: 60%;
+    width: 70%;
     grid-template-columns: repeat(2,1fr);
     grid-template-rows:repeat(3, 1fr);
     border: 1px solid var(--menu-even-color);

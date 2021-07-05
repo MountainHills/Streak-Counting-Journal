@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Records {
-    // TODO: Get information from the database and place them in Lists to be accessed by records.jsp
-    
     private static ArrayList<Integer> attemptsList = new ArrayList<>();
     private static ArrayList<String> streakStartList = new ArrayList<>();
     private static ArrayList<String> streakEndList = new ArrayList<>();
