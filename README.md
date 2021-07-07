@@ -20,7 +20,7 @@ This is a passion project dedicated to those who are trying to overcome their ad
 
 ### Description
 
-A short addiction journal. I may add some features soon.
+A short addiction journal without the use of frameworks. As of creating this journal, I haven't learned or made projects using a MVC Framework. I built the journal from scratch taking up more time that I wanted it to.
 
 ### Screenshot
 
@@ -47,6 +47,10 @@ TODO: Fill this section once the project is finished.
 ### Continued development
 
 TODO: Fill this section once the project is finished. List down key areas you want to work on with your future projects.
+
+I would add additional features to the same application, however I wouldn't do it this time. I would like to make use of a framework so I could spend less time reinventing the wheel. It's not a good practice to make something from sticks when an already robust set of instructions are already made and optimized.
+
+I had a lot of great experiences and learning opportunities in the making of this project. I'm looking forward to the next one.
 
 ### Useful resources
 
