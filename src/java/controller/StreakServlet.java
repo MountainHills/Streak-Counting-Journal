@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Records;
+import model.Streak;
 
 @WebServlet(name = "StreakServlet", urlPatterns = {"/StreakServlet"})
 public class StreakServlet extends HttpServlet {
@@ -33,24 +33,36 @@ public class StreakServlet extends HttpServlet {
         
         try 
         {
-            // Queries
-            PreparedStatement pstmtAttempts = con.prepareStatement("SELECT ATTEMPT FROM RECORDS WHERE USER_ID = " + userIndex);
-            PreparedStatement pstmtStreakStart = con.prepareStatement("SELECT START_STREAK FROM RECORDS WHERE USER_ID = " + userIndex);
-            PreparedStatement pstmtStreakEnd = con.prepareStatement("SELECT END_STREAK FROM RECORDS WHERE USER_ID = " + userIndex);
+            // Setting the current Attempt
+            PreparedStatement pstmtCurrentAttempt = con.prepareStatement("SELECT COUNT(*) FROM RECORDS WHERE USER_ID = " + userIndex);
+            ResultSet rsCurrentAttempt = pstmtCurrentAttempt.executeQuery();
+            Streak.setCurrentAttempt(rsCurrentAttempt);
+            
+            // Settting the start time of the current attempt
+            int currentAttempt = Streak.getCurrentAttempt();
+            PreparedStatement pstmtStreakStart = con.prepareStatement("SELECT START_STREAK FROM RECORDS WHERE USER_ID = " + userIndex
+                                                                    + " AND ATTEMPT = " + currentAttempt);
+            ResultSet rsStreakStart = pstmtStreakStart.executeQuery();
+            Streak.setStartTimeStreak(rsStreakStart);
+            
+            // Setting the Current Streak
+            Streak.setCurrentStreak();
+
+
+            
+            // Setting the best attempt from the records table.
             PreparedStatement pstmtDays = con.prepareStatement("SELECT DAYS FROM RECORDS WHERE USER_ID = " + userIndex);
             
-            // Result of the Queries
-            ResultSet rsAttempts = pstmtAttempts.executeQuery();
-            ResultSet rsStreakStart = pstmtStreakStart.executeQuery();
+            // Result of the Queries         
             ResultSet rsStreakEnd = pstmtStreakEnd.executeQuery();
             ResultSet rsDays = pstmtDays.executeQuery();
             
             //Resets the content of the model.
-            Records.resetData();
+//            Records.resetData();
             
             // Places the queries to the model.
-            Records.setAttempts(rsAttempts);
-            Records.setStreakStart(rsStreakStart);
+            
+            
             Records.setStreakEnd(rsStreakEnd);
             Records.setDays(rsDays);
             

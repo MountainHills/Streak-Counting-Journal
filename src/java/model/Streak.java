@@ -2,15 +2,17 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.concurrent.TimeUnit;
 
 public class Streak {
-    private static int currentStreak;
+    private static long currentStreak;
     private static String startTimeStreak;
     private static int currentAttempt;
     private static String bestAttempt;
     
     // Setters and Getters
-    public static int getCurrentStreak() {
+    public static long getCurrentStreak() {
         return currentStreak;
     }
 
@@ -26,8 +28,16 @@ public class Streak {
         return bestAttempt;
     }
 
-    public static void setCurrentStreak(ResultSet rs) {
+    public static void setCurrentStreak() {
+        Timestamp startStreak = Timestamp.valueOf(startTimeStreak);
+        long startTime = startStreak.getTime();
+     
+        long sysTime = System.currentTimeMillis();
         
+        long difference = Math.abs(sysTime - startTime);
+        System.out.println(difference);
+
+        currentStreak = TimeUnit.MILLISECONDS.toDays(difference);
     }
     
     public static void setStartTimeStreak(ResultSet rs) throws SQLException {
@@ -35,9 +45,7 @@ public class Streak {
     }
     
     public static void setCurrentAttempt(ResultSet rs) throws SQLException {
-        int lastAttempt = Integer.parseInt(rs.getString("ATTEMPT"));
-        
-        currentAttempt = lastAttempt + 1;
+        currentAttempt = rs.getInt(1) + 1;
     }
 
     public static void setBestAttempt(ResultSet rs) {
@@ -47,6 +55,5 @@ public class Streak {
     public static void clear()
     {
         
-    }
-    
+    }    
 }
