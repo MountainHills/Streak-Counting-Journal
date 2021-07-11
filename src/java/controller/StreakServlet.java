@@ -48,34 +48,20 @@ public class StreakServlet extends HttpServlet {
             // Setting the Current Streak
             Streak.setCurrentStreak();
 
-
-            
             // Setting the best attempt from the records table.
-            PreparedStatement pstmtDays = con.prepareStatement("SELECT DAYS FROM RECORDS WHERE USER_ID = " + userIndex);
-            
-            // Result of the Queries         
-            ResultSet rsStreakEnd = pstmtStreakEnd.executeQuery();
-            ResultSet rsDays = pstmtDays.executeQuery();
-            
-            //Resets the content of the model.
-//            Records.resetData();
-            
-            // Places the queries to the model.
-            
-            
-            Records.setStreakEnd(rsStreakEnd);
-            Records.setDays(rsDays);
-            
+            PreparedStatement pstmtBestAttempt = con.prepareStatement("SELECT * FROM RECORDS WHERE USER_ID = " + userIndex
+                                    + "ORDER BY IS_HOURS ASC, DAYS DESC");
+            ResultSet rsBestAttempt = pstmtBestAttempt.executeQuery();
+            Streak.setBestAttempt(rsBestAttempt);
+               
             // Close result set and prepared statements.
-            rsDays.close();
-            rsStreakEnd.close();
+            rsBestAttempt.close();
             rsStreakStart.close();
-            rsAttempts.close();
+            rsCurrentAttempt.close();
             
-            pstmtDays.close();
-            pstmtStreakEnd.close();
+            pstmtBestAttempt.close();
             pstmtStreakStart.close();
-            pstmtAttempts.close();
+            pstmtCurrentAttempt.close();
         
             session.setAttribute("records", "true");
         

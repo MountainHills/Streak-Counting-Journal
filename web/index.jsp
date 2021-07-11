@@ -1,3 +1,4 @@
+<%@page import="model.Streak"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +20,11 @@
             session.setAttribute("records", null);
             response.sendRedirect("login");
         }
+
+        long currentStreak = Streak.getCurrentStreak();
+        String startTimeStreak = Streak.getStartTimeStreak();
+        int currentAttempt = Streak.getCurrentAttempt();
+        String bestAttempt = Streak.getBestAttempt();
     %>
     <div id="page-wrapper">
 
@@ -57,12 +63,12 @@
         <!-- Content -->
         <main class="main-content">
             <div class="main-information">
-                <h1 id="streak">44 Days</h1>
-                <section id="time">12:07:23</section>
-                <section id="streak-attempt">Streak # 4</section>
-                <section id="streak-best"> Streak # 1: 90 Days</section>
+                <h1 id="streak"><%out.print(currentStreak);%></h1>
+                <section id="time"><%out.print(startTimeStreak);%></section>
+                <section id="streak-attempt">Streak # <%out.print(currentAttempt);%></section>
+                <section id="streak-best"><%out.print(bestAttempt);%></section>
             </div>
-
+s
             <a href="register.jsp" class="button-start-end">Start End Streak</a>
         </main>
     </div>

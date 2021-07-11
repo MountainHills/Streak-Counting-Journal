@@ -41,6 +41,7 @@ public class Streak {
     }
     
     public static void setStartTimeStreak(ResultSet rs) throws SQLException {
+        // TODO: How to separate the Actual Data from the time. Use Timestamp, Duration, and TimeUnit.        
         startTimeStreak = rs.getString("START_STREAK");
     }
     
@@ -48,12 +49,16 @@ public class Streak {
         currentAttempt = rs.getInt(1) + 1;
     }
 
-    public static void setBestAttempt(ResultSet rs) {
+    public static void setBestAttempt(ResultSet rs) throws SQLException {
         
-    }
-    
-    public static void clear()
-    {
+        // Gets the values of the first record.
+        int attemptNumber =  rs.getInt("ATTEMPT");
+        String day = rs.getString("DAYS");
+        String timeValue = "Days";
+        boolean isHour = rs.getBoolean("IS_HOURS");
         
+        if (isHour) timeValue = "Hours";
+
+        bestAttempt = String.format("Best: Attempt # %s: %s %s", attemptNumber, day, timeValue);
     }    
 }

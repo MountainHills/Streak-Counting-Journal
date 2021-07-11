@@ -38,6 +38,12 @@
         System.out.println("The size of end streak is: " + streakEnd.size());
         System.out.println("The size of days is: " + days.size());
         
+//        System.out.println(Arrays.toString(attempts.toArray()));
+//        System.out.println("The shit below isn't working!");
+//        System.out.println(Arrays.toString(streakStart.toArray()));
+//        System.out.println(Arrays.toString(streakEnd.toArray()));
+//        System.out.println(Arrays.toString(days.toArray()));
+        
     %>
     
     <div id="page-wrapper">
@@ -87,14 +93,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% for (int i = 0; i < attempts.size(); i++) { %>
                 <tr>
-                    <th scope="row"><%out.print(attempts.get(i));%></th>
-                    <td><%out.print(streakStart.get(i)); %></td>
-                    <td><%out.print(streakEnd.get(i)); %></td>
-                    <td><%out.print(days.get(i)); %></td>
+                    <th scope="row">1</th>
+                    <td>Some Date Here</td>
+                    <td>Some End Date Here</td>
+                    <td>90</td>
                 </tr>
-                <% } %>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Some Date Here</td>
+                    <td>Some End Date Here</td>
+                    <td>90 Hours</td>
+                </tr>
                 </tbody>
             </table>
         </main>
