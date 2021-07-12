@@ -10,6 +10,7 @@ public class Streak {
     private static String startTimeStreak;
     private static int currentAttempt;
     private static String bestAttempt;
+    private static boolean noRecord = true;
     
     // Setters and Getters
     public static long getCurrentStreak() {

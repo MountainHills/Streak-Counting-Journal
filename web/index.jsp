@@ -69,7 +69,7 @@
                 <section id="streak-best"><%out.print(bestAttempt);%></section>
             </div>
 s
-            <a href="register.jsp" class="button-start-end">Start End Streak</a>
+            <a href="<%= request.getContextPath() %>/StreakServlet" class="button-start-end">Start Streak</a>
         </main>
     </div>
 
