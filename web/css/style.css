@@ -250,7 +250,7 @@ hr {
 
 .button-start-end {
     margin-top: 30px;
-    width: 55%;
+    width: 100%;
     background-color: var(--menu-odd-color);
 }
 

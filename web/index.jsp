@@ -20,11 +20,20 @@
             session.setAttribute("records", null);
             response.sendRedirect("login");
         }
-
-        long currentStreak = Streak.getCurrentStreak();
-        String startTimeStreak = Streak.getStartTimeStreak();
-        int currentAttempt = Streak.getCurrentAttempt();
-        String bestAttempt = Streak.getBestAttempt();
+        
+        boolean recordEmpty = Streak.isRecordEmpty();
+        String currentStreak = "0 Hours";
+        String startTimeStreak = "HH:MM:SS";
+        String currentAttempt = "No Attempts";
+        String bestAttempt = "No Best Attempt";
+        
+        if (!recordEmpty) 
+        {
+            currentStreak = Streak.getCurrentStreak() + "";
+            startTimeStreak = Streak.getStartTimeStreak();
+            currentAttempt = Streak.getCurrentAttempt() + "";
+            bestAttempt = Streak.getBestAttempt();
+        }   
     %>
     <div id="page-wrapper">
 
@@ -62,14 +71,20 @@
         
         <!-- Content -->
         <main class="main-content">
+            
             <div class="main-information">
                 <h1 id="streak"><%out.print(currentStreak);%></h1>
                 <section id="time"><%out.print(startTimeStreak);%></section>
                 <section id="streak-attempt">Streak # <%out.print(currentAttempt);%></section>
                 <section id="streak-best"><%out.print(bestAttempt);%></section>
             </div>
-s
-            <a href="<%= request.getContextPath() %>/StreakServlet" class="button-start-end">Start Streak</a>
+            
+            <% if (recordEmpty) { %>
+                <a href="<%= request.getContextPath() %>/NewStreakServlet" class="button-start-end">Start Streak</a>
+            <% } else { %>
+                <a href="<%= request.getContextPath() %>/EndStreakServlet" class="button-start-end">End Streak</a>
+            <% } %>
+            
         </main>
     </div>
 

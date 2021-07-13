@@ -33,6 +33,14 @@ public class StreakServlet extends HttpServlet {
         
         try 
         {
+            // Checks if the records are empty
+            PreparedStatement pstmtRecordCheck = con.prepareStatement("SELECT COUNT(*) FROM RECORDS WHERE USER_ID = " + userIndex);
+            ResultSet rsRecordCheck = pstmtRecordCheck.executeQuery();
+            Streak.isEmpty(rsRecordCheck);
+            
+            // If the record is empty then show default page.
+            if (Streak.isRecordEmpty()) response.sendRedirect("index");
+            
             // Setting the current Attempt
             PreparedStatement pstmtCurrentAttempt = con.prepareStatement("SELECT COUNT(*) FROM RECORDS WHERE USER_ID = " + userIndex);
             ResultSet rsCurrentAttempt = pstmtCurrentAttempt.executeQuery();
@@ -63,9 +71,7 @@ public class StreakServlet extends HttpServlet {
             pstmtStreakStart.close();
             pstmtCurrentAttempt.close();
         
-            session.setAttribute("records", "true");
-        
-            response.sendRedirect("records");
+            response.sendRedirect("index");
             
         } 
         catch (SQLException sqle)

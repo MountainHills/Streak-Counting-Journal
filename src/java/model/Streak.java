@@ -28,6 +28,10 @@ public class Streak {
     public static String getBestAttempt() {
         return bestAttempt;
     }
+    
+    public static boolean isRecordEmpty() {
+        return noRecord;
+    }
 
     public static void setCurrentStreak() {
         Timestamp startStreak = Timestamp.valueOf(startTimeStreak);
@@ -61,5 +65,11 @@ public class Streak {
         if (isHour) timeValue = "Hours";
 
         bestAttempt = String.format("Best: Attempt # %s: %s %s", attemptNumber, day, timeValue);
-    }    
+    }
+
+    public static boolean isEmpty(ResultSet rs) throws SQLException {
+        int numberOfRecords = rs.getInt(1);
+        noRecord = numberOfRecords == 0;
+        return noRecord;
+    }
 }

@@ -57,17 +57,21 @@
         <!-- Content -->
         <main class="main-content">
             <div class="main-information">
-                <h1 id="streak">100 Days</h1>
+                <h1 id="streak">0 Hours</h1>
                 <!-- out.print(currentStreak) -->
-                <section id="time">12:07:23</section>
+                <section id="time">HH:MM:SS</section>
                 <!-- out.print(streakStartTime) -->
-                <section id="streak-attempt">Streak # 4</section>
+                <section id="streak-attempt">No Attempts</section>
                 <!-- out.print(currentAttempt) -->
-                <section id="streak-best"> Streak # 1: 90 Days</section>
+                <section id="streak-best">No Best Streak</section>
                 <!-- our.print(bestAttempt) -->
             </div>
-
-            <a href="register.jsp" class="button-start-end">Start End Streak</a>
+            
+            <form action="<%= request.getContextPath() %>/StreakServlet" method="POST">
+                <input type="hidden" name="pressed" value="record"> 
+                <input type="submit" name="decision" value="Start Streak" class="button-start-end" /> 
+            </form>
+            <!--<a href="register.jsp" class="button-start-end">Start Streak</a>-->
         </main>
     </div>
 
