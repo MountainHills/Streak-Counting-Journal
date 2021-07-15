@@ -13,7 +13,7 @@ public class TestClass {
     {     
 //        long millis = System.currentTimeMillis();
 //        System.out.println(millis + " This is the first time!");
-        String sampleTime = "2020-12-21 18:50:23";
+        String sampleTime = "2021-12-21 18:50:23";
         Timestamp date = Timestamp.valueOf(sampleTime);
         long millis = date.getTime();
         System.out.println(millis + " This is the first time!");
@@ -23,7 +23,7 @@ public class TestClass {
         
 //        long millis2 = System.currentTimeMillis();
         
-        String sampleTime2 = "2021-07-03 18:23:12";
+        String sampleTime2 = "2021-12-21 21:23:12";
 //        Timestamp date2 = new Timestamp(millis2);
         Timestamp date2 = Timestamp.valueOf(sampleTime2);
         long millis2 = date2.getTime();
@@ -31,7 +31,7 @@ public class TestClass {
         System.out.println(date2.toString()); 
         
         long difference = Math.abs(millis2 - millis);
-        System.out.println(difference);
+//        System.out.println(difference);
 
         // First Way
 //        Duration duration = Duration.ofMillis(difference);
@@ -39,14 +39,16 @@ public class TestClass {
 
 //Second Way
         long days = TimeUnit.MILLISECONDS.toDays(difference);
-
-        System.out.println(days);
+        long hours = TimeUnit.MILLISECONDS.toHours(difference);
         
-        Records records = new Records();
-        ArrayList<Integer> attempts = records.getAttempts();
-        ArrayList<String> streakStart = records.getStreakStart();
-        ArrayList<String> streakEnd = records.getStreakEnd();
-        ArrayList<Integer> daysList = records.getDays();
+        System.out.println(days);
+        System.out.println(hours);
+        
+//        Records records = new Records();
+//        ArrayList<Integer> attempts = records.getAttempts();
+//        ArrayList<String> streakStart = records.getStreakStart();
+//        ArrayList<String> streakEnd = records.getStreakEnd();
+//        ArrayList<Integer> daysList = records.getDays();
         
 //        System.out.println(attempts.size());
 //        System.out.println(streakStart.size());

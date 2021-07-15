@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/web/index.jsp</file>
+            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/controller/EndStreakServlet.java</file>
+            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/controller/NewStreakServlet.java</file>
             <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/model/Streak.java</file>
-            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/web/test.html</file>
-            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/controller/LoginServlet.java</file>
             <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/controller/StreakServlet.java</file>
-            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/web/css/style.css</file>
             <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/model/TestClass.java</file>
         </group>
     </open-files>

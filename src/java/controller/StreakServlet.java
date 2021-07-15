@@ -29,7 +29,7 @@ public class StreakServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        int userIndex = Integer.parseInt(session.getAttribute("userIndex").toString()) + 1;
+        int userIndex = Integer.parseInt(session.getAttribute("userIndex").toString());
         
         try 
         {
