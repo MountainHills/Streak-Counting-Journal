@@ -46,6 +46,8 @@ TODO: Fill this section once the project is finished.
 
 ### Continued development
 
+The app should be planned more. I should've created a simpler code prototype version first, then commit to a full blown project.
+
 TODO: Fill this section once the project is finished. List down key areas you want to work on with your future projects.
 
 I would add additional features to the same application, however I wouldn't do it this time. I would like to make use of a framework so I could spend less time reinventing the wheel. It's not a good practice to make something from sticks when an already robust set of instructions are already made and optimized.
