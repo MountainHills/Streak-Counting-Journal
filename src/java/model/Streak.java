@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Streak {
     private static long currentStreak;
+    private static boolean isHour = false;
     private static String startTimeStreak;
     private static int currentAttempt;
     private static String bestAttempt;
@@ -15,6 +16,10 @@ public class Streak {
     // Setters and Getters
     public static long getCurrentStreak() {
         return currentStreak;
+    }
+    
+    public static boolean isHour() {
+        return isHour;
     }
 
     public static String getStartTimeStreak() {
@@ -34,15 +39,22 @@ public class Streak {
     }
 
     public static void setCurrentStreak() {
+        System.out.println("The start time streak is: " + startTimeStreak);
+        
         Timestamp startStreak = Timestamp.valueOf(startTimeStreak);
         long startTime = startStreak.getTime();
      
         long sysTime = System.currentTimeMillis();
         
         long difference = Math.abs(sysTime - startTime);
-        System.out.println(difference);
-
+        
         currentStreak = TimeUnit.MILLISECONDS.toDays(difference);
+
+        if (currentStreak == 0) {
+            currentStreak = TimeUnit.MILLISECONDS.toHours(difference);
+            isHour = true;
+            System.out.println("The time is in hours. The hours are: " + currentStreak);
+        }
     }
     
     public static void setStartTimeStreak(ResultSet rs) throws SQLException {
@@ -55,7 +67,7 @@ public class Streak {
     public static void setCurrentAttempt(ResultSet rs) throws SQLException {
         if (rs.next())
         {
-            currentAttempt = rs.getInt(1) + 1;
+            currentAttempt = rs.getInt(1);
         }
     }
 
@@ -64,19 +76,32 @@ public class Streak {
         // Gets the values of the first record.
         int attemptNumber = 0;
         String timeValue = "Days";
-        String day = "0";
-        boolean isHour = false;
+        int day = 0;
+        boolean isDBHour = false;
         
         while (rs.next())
         {
+            // Does only one iteration.
             attemptNumber =  rs.getInt("ATTEMPT");
-            day = rs.getString("DAYS");
-            isHour = rs.getBoolean("IS_HOURS");
+            day = rs.getInt("DAYS");
+            isDBHour = rs.getBoolean("IS_HOURS");
+            break;
         }
         
-        if (isHour) timeValue = "Hours";
+        if (isDBHour) timeValue = "Hours";
 
         bestAttempt = String.format("Best: Attempt # %s: %s %s", attemptNumber, day, timeValue);
+        
+        // The first attempt is the best attempt.
+        if (attemptNumber == 1) 
+        {
+            if (isHour) timeValue = "Hours"; 
+            bestAttempt = String.format("Best: Attempt # %s: %s %s", attemptNumber, currentStreak, timeValue);
+        }
+        
+        System.out.println("The best attempt is: " + bestAttempt);
+        System.out.println("Attempt Number: " + attemptNumber + "; Day: " + day + "; Time Value: " + timeValue);
+        
     }
 
     public static boolean isEmpty(ResultSet rs) throws SQLException {
@@ -84,6 +109,7 @@ public class Streak {
         {
             int numberOfRecords = rs.getInt(1);
             noRecord = numberOfRecords == 0;
+            System.out.println("Is the streak empty? : " + noRecord);
             return noRecord;
         }
         return true;

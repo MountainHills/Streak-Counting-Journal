@@ -33,6 +33,9 @@ public class EndStreakServlet extends HttpServlet {
         
         try
         {
+            // Gets the current Attempt
+            int currentAttempt = Streak.getCurrentAttempt();
+            
             // Gets the time when the button was clicked.
             long endTimeMillis = System.currentTimeMillis();
             Timestamp endTime = new Timestamp(endTimeMillis);
@@ -46,20 +49,21 @@ public class EndStreakServlet extends HttpServlet {
 
             // Checks whether time is days or Millis.
             long time = TimeUnit.MILLISECONDS.toDays(difference);
-            boolean isDay = true;
+            boolean isHour = false;
             
             if (time == 0) {
                 time = TimeUnit.MILLISECONDS.toHours(difference);
-                isDay = false;
+                isHour = true;
             }
             
             PreparedStatement pstmtEndStreak = con.prepareStatement("UPDATE RECORDS\n" +
-                                        "SET END_STREAK =?, DAYS = ?, IS_HOURS = ?\n" +
-                                        "WHERE USER_ID =" + userIndex);
+                                        "SET END_STREAK = ?, DAYS = ?, IS_HOURS = ?, SECONDS = ?\n" +
+                                        "WHERE USER_ID = " + userIndex + " AND ATTEMPT = " + currentAttempt);
 
             pstmtEndStreak.setTimestamp(1, endTime);
             pstmtEndStreak.setLong(2, time);
-            pstmtEndStreak.setBoolean(3, isDay);
+            pstmtEndStreak.setBoolean(3, isHour);
+            pstmtEndStreak.setLong(4, difference);
 
             pstmtEndStreak.executeUpdate();
             
@@ -75,6 +79,7 @@ public class EndStreakServlet extends HttpServlet {
 
             pstmtNewStreak.executeUpdate();
 
+            con.close();
             response.sendRedirect("StreakServlet");
         }  
         catch (Exception e)

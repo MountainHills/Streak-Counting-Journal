@@ -29,7 +29,9 @@
         
         if (!recordEmpty) 
         {
-            currentStreak = Streak.getCurrentStreak() + "";
+            String timeValue = "Days";
+            if (!Streak.isHour()) timeValue = "Hours";
+            currentStreak = Streak.getCurrentStreak() + " " + timeValue;
             startTimeStreak = Streak.getStartTimeStreak();
             currentAttempt = Streak.getCurrentAttempt() + "";
             bestAttempt = Streak.getBestAttempt();

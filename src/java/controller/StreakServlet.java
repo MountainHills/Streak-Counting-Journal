@@ -48,6 +48,7 @@ public class StreakServlet extends HttpServlet {
             
             // Settting the start time of the current attempt
             int currentAttempt = Streak.getCurrentAttempt();
+            System.out.println("The current attempt is: " + currentAttempt);
             PreparedStatement pstmtStreakStart = con.prepareStatement("SELECT START_STREAK FROM RECORDS WHERE USER_ID = " + userIndex
                                                                     + " AND ATTEMPT = " + currentAttempt);
             ResultSet rsStreakStart = pstmtStreakStart.executeQuery();
@@ -58,7 +59,7 @@ public class StreakServlet extends HttpServlet {
 
             // Setting the best attempt from the records table.
             PreparedStatement pstmtBestAttempt = con.prepareStatement("SELECT * FROM RECORDS WHERE USER_ID = " + userIndex
-                                    + "ORDER BY IS_HOURS ASC, DAYS DESC");
+                                    + "ORDER BY IS_HOURS ASC, DAYS DESC, SECONDS DESC");
             ResultSet rsBestAttempt = pstmtBestAttempt.executeQuery();
             Streak.setBestAttempt(rsBestAttempt);
                
@@ -71,6 +72,7 @@ public class StreakServlet extends HttpServlet {
             pstmtStreakStart.close();
             pstmtCurrentAttempt.close();
         
+            con.close();
             response.sendRedirect("index");
             
         } 
