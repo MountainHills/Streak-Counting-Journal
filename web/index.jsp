@@ -30,7 +30,7 @@
         if (!recordEmpty) 
         {
             String timeValue = "Days";
-            if (!Streak.isHour()) timeValue = "Hours";
+            if (Streak.isHour()) timeValue = "Hours";
             currentStreak = Streak.getCurrentStreak() + " " + timeValue;
             startTimeStreak = Streak.getStartTimeStreak();
             currentAttempt = Streak.getCurrentAttempt() + "";
@@ -50,7 +50,7 @@
             <div class="menu-pages">
                  <img class="icons" src="icons/timer.png" alt="Timer Icon"> 
                  <p>Timer</p>
-                 <a href="index">
+                 <a href="<%= request.getContextPath() %>/StreakServlet">
                     <span class="link-spanner"></span>
                 </a>
             </div>

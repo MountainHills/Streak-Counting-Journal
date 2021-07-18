@@ -67,6 +67,7 @@ public class LoginServlet extends HttpServlet {
         {
             // Gets the index of the password based on the position of the username.
             int passwordIndex = usernameList.indexOf(username);
+            System.out.println("The index of the password for " + username + " is " + passwordIndex);
             
             // Checks if the passwords from the database and login.jsp match.
             if (password.equals(passwordList.get(passwordIndex)))
@@ -77,7 +78,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", username);
                 session.setAttribute("userIndex", passwordIndex + 1);
                 
-                response.sendRedirect("index");
+                response.sendRedirect("StreakServlet");
             }
             else
             {

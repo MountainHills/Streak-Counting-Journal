@@ -31,6 +31,8 @@ public class StreakServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int userIndex = Integer.parseInt(session.getAttribute("userIndex").toString());
         
+        System.out.println("The userIndex from the Streak Servlet is: " + userIndex);
+        
         try 
         {
             // Checks if the records are empty
@@ -72,7 +74,6 @@ public class StreakServlet extends HttpServlet {
             pstmtStreakStart.close();
             pstmtCurrentAttempt.close();
         
-            con.close();
             response.sendRedirect("index");
             
         } 

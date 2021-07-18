@@ -29,44 +29,28 @@ public class RecordServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        int userIndex = Integer.parseInt(session.getAttribute("userIndex").toString()) + 1;
+        int userIndex = Integer.parseInt(session.getAttribute("userIndex").toString());
         
-        try 
-        {
-            // Queries
-            PreparedStatement pstmtAttempts = con.prepareStatement("SELECT ATTEMPT FROM RECORDS WHERE USER_ID = " + userIndex);
-            PreparedStatement pstmtStreakStart = con.prepareStatement("SELECT START_STREAK FROM RECORDS WHERE USER_ID = " + userIndex);
-            PreparedStatement pstmtStreakEnd = con.prepareStatement("SELECT END_STREAK FROM RECORDS WHERE USER_ID = " + userIndex);
-            PreparedStatement pstmtDays = con.prepareStatement("SELECT DAYS FROM RECORDS WHERE USER_ID = " + userIndex);
-            
+        System.out.println();
+        
+        try (PreparedStatement pstmtRecords = con.prepareStatement("SELECT ATTEMPT, START_STREAK, END_STREAK, DAYS, IS_HOURS\n" +
+                                                                    "FROM RECORDS\n" +
+                                                                    "WHERE USER_ID = " + userIndex + "\n" +
+                                                                    "ORDER BY ATTEMPT DESC"))
+        {   
             // Result of the Queries
-            ResultSet rsAttempts = pstmtAttempts.executeQuery();
-            ResultSet rsStreakStart = pstmtStreakStart.executeQuery();
-            ResultSet rsStreakEnd = pstmtStreakEnd.executeQuery();
-            ResultSet rsDays = pstmtDays.executeQuery();
+            ResultSet rsRecords = pstmtRecords.executeQuery();
             
             //Resets the content of the model.
             Records.resetData();
+            System.out.println("The data from records has been deleted.");
             
             // Places the queries to the model.
-            Records.setAttempts(rsAttempts);
-            Records.setStreakStart(rsStreakStart);
-            Records.setStreakEnd(rsStreakEnd);
-            Records.setDays(rsDays);
+            Records.setRecords(rsRecords);
             
-            // Close result set and prepared statements.
-            rsDays.close();
-            rsStreakEnd.close();
-            rsStreakStart.close();
-            rsAttempts.close();
+            rsRecords.close();
             
-            pstmtDays.close();
-            pstmtStreakEnd.close();
-            pstmtStreakStart.close();
-            pstmtAttempts.close();
-        
             session.setAttribute("records", "true");
-        
             response.sendRedirect("records");
             
         } 
@@ -74,8 +58,6 @@ public class RecordServlet extends HttpServlet {
         {
             sqle.printStackTrace();
         }
-        
-
     }
 
     @Override

@@ -1,3 +1,4 @@
+<%@page import="model.Streak,model.Records, java.util.ArrayList, java.util.Arrays"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,6 @@
     <title>Index Page for Web Application</title>
 </head>
 <body>
-    <%@ page import="model.Records, java.util.ArrayList, java.util.Arrays" %>
     <%
         // Session Management Code Segment
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // New HTTP
@@ -32,11 +32,13 @@
         ArrayList<String> streakStart = records.getStreakStart();
         ArrayList<String> streakEnd = records.getStreakEnd();
         ArrayList<Integer> days = records.getDays();
+        ArrayList<Boolean> isHours = records.getIsHours();
         
         System.out.println("The size of attempts is: " +  attempts.size());
         System.out.println("The size of start streak is: " + streakStart.size());
         System.out.println("The size of end streak is: " + streakEnd.size());
         System.out.println("The size of days is: " + days.size());
+        System.out.println("The size of days is: " + isHours.size());
         
     %>
     
@@ -53,14 +55,14 @@
             <div class="menu-pages">
                  <img class="icons" src="icons/timer.png" alt="Timer Icon"> 
                  <p>Timer</p>
-                 <a href="index">
+                 <a href="<%= request.getContextPath() %>/StreakServlet">
                     <span class="link-spanner"></span>
                 </a>
             </div>
             <div class="menu-pages">
                 <img class="icons" src="icons/table.png" alt="Table Icon"> 
                 <p>Streak Records</p>
-                <a href="records">
+                <a href="<%= request.getContextPath() %>/RecordServlet">
                     <span class="link-spanner"></span>
                 </a>
             </div>
@@ -83,16 +85,43 @@
                     <th scope="col">Attempt #</th>
                     <th scope="col">Start of Streak</th>
                     <th scope="col">End of Streak</th>
-                    <th scope="col">Days</th>
+                    <th scope="col">Time (Days)</th>
                 </tr>
                 </thead>
                 <tbody>
-                <% for (int i = 0; i < attempts.size(); i++) { %>
+                <% for (int i = 0; i < attempts.size(); i++)
+                { 
+                    String streak = days.get(i) + "";
+                    String endStreak = streakEnd.get(i);
+
+                    System.out.print("The current streak is: " + Streak.getCurrentStreak());
+                    System.out.print("Is it hours: " + Streak.isHour());
+                    
+                    if (endStreak == null) 
+                    {
+                        endStreak = " ";
+                        days.set(i, (int) Streak.getCurrentStreak());
+                        isHours.set(i, Streak.isHour());
+                        streak = days.get(i) + "";
+                    }
+
+                    if (isHours.get(i)) {
+                        if (Integer.parseInt(streak) == 1) 
+                        {
+                            streak = days.get(i) + " Hour";
+                        }
+                        else
+                        {
+                            streak = days.get(i) + " Hours";
+                        }
+                    }
+                %>
+                                
                 <tr>
                     <th scope="row"><%out.print(attempts.get(i));%></th>
                     <td><%out.print(streakStart.get(i)); %></td>
-                    <td><%out.print(streakEnd.get(i)); %></td>
-                    <td><%out.print(days.get(i)); %></td>
+                    <td><%out.print(endStreak); %></td>
+                    <td><%out.print(streak); %></td>
                 </tr>
                 <% } %>
                 </tbody>
@@ -113,7 +142,6 @@
                 'searching': false,
                 order: [[0, 'desc']]
             });
-
             $('.dataTables_wrapper').css("width", "95%");
             
         } );

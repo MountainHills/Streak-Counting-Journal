@@ -5,9 +5,9 @@
         <group>
             <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/web/index.jsp</file>
             <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/model/Records.java</file>
-            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/model/Streak.java</file>
+            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/web/records.jsp</file>
+            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/controller/RecordServlet.java</file>
             <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/controller/StreakServlet.java</file>
-            <file>file:/C:/Users/Olivel/Documents/NetBeansProjects/NoFapJournal/src/java/model/TestClass.java</file>
         </group>
     </open-files>
 </project-private>
