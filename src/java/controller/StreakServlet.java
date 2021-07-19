@@ -41,41 +41,45 @@ public class StreakServlet extends HttpServlet {
             Streak.isEmpty(rsRecordCheck);
             
             // If the record is empty then show default page.
-            if (Streak.isRecordEmpty()) response.sendRedirect("index");
-            
-            // Setting the current Attempt
-            PreparedStatement pstmtCurrentAttempt = con.prepareStatement("SELECT COUNT(*) FROM RECORDS WHERE USER_ID = " + userIndex);
-            ResultSet rsCurrentAttempt = pstmtCurrentAttempt.executeQuery();
-            Streak.setCurrentAttempt(rsCurrentAttempt);
-            
-            // Settting the start time of the current attempt
-            int currentAttempt = Streak.getCurrentAttempt();
-            System.out.println("The current attempt is: " + currentAttempt);
-            PreparedStatement pstmtStreakStart = con.prepareStatement("SELECT START_STREAK FROM RECORDS WHERE USER_ID = " + userIndex
-                                                                    + " AND ATTEMPT = " + currentAttempt);
-            ResultSet rsStreakStart = pstmtStreakStart.executeQuery();
-            Streak.setStartTimeStreak(rsStreakStart);
-            
-            // Setting the Current Streak
-            Streak.setCurrentStreak();
+            if (Streak.isRecordEmpty()) 
+            {
+                response.sendRedirect("index");
+            }
+            else
+            {
+                // Setting the current Attempt
+                PreparedStatement pstmtCurrentAttempt = con.prepareStatement("SELECT COUNT(*) FROM RECORDS WHERE USER_ID = " + userIndex);
+                ResultSet rsCurrentAttempt = pstmtCurrentAttempt.executeQuery();
+                Streak.setCurrentAttempt(rsCurrentAttempt);
 
-            // Setting the best attempt from the records table.
-            PreparedStatement pstmtBestAttempt = con.prepareStatement("SELECT * FROM RECORDS WHERE USER_ID = " + userIndex
-                                    + "ORDER BY IS_HOURS ASC, DAYS DESC, SECONDS DESC");
-            ResultSet rsBestAttempt = pstmtBestAttempt.executeQuery();
-            Streak.setBestAttempt(rsBestAttempt);
-               
-            // Close result set and prepared statements.
-            rsBestAttempt.close();
-            rsStreakStart.close();
-            rsCurrentAttempt.close();
-            
-            pstmtBestAttempt.close();
-            pstmtStreakStart.close();
-            pstmtCurrentAttempt.close();
-        
-            response.sendRedirect("index");
-            
+                // Settting the start time of the current attempt
+                int currentAttempt = Streak.getCurrentAttempt();
+                System.out.println("The current attempt is: " + currentAttempt);
+                PreparedStatement pstmtStreakStart = con.prepareStatement("SELECT START_STREAK FROM RECORDS WHERE USER_ID = " + userIndex
+                                                                        + " AND ATTEMPT = " + currentAttempt);
+                ResultSet rsStreakStart = pstmtStreakStart.executeQuery();
+                Streak.setStartTimeStreak(rsStreakStart);
+
+                // Setting the Current Streak
+                Streak.setCurrentStreak();
+
+                // Setting the best attempt from the records table.
+                PreparedStatement pstmtBestAttempt = con.prepareStatement("SELECT * FROM RECORDS WHERE USER_ID = " + userIndex
+                                        + "ORDER BY IS_HOURS ASC, DAYS DESC, SECONDS DESC");
+                ResultSet rsBestAttempt = pstmtBestAttempt.executeQuery();
+                Streak.setBestAttempt(rsBestAttempt);
+
+                // Close result set and prepared statements.
+                rsBestAttempt.close();
+                rsStreakStart.close();
+                rsCurrentAttempt.close();
+
+                pstmtBestAttempt.close();
+                pstmtStreakStart.close();
+                pstmtCurrentAttempt.close();
+
+                response.sendRedirect("index");
+            }  
         } 
         catch (SQLException sqle)
         {

@@ -17,14 +17,18 @@
         response.setHeader("Pragma", "no-cache"); // Older HTTP
         response.setHeader("Expires", "0"); // Proxy Servers
        
-        if (session.getAttribute("user") == null)
+        System.out.println("This is the user from the records JSP:" + session.getAttribute("user"));
+        
+        if (session.getAttribute("user") != null)
+        {
+            if (session.getAttribute("records") == null)
+            {
+                response.sendRedirect("RecordServlet");
+            }
+        }
+        else 
         {
             response.sendRedirect("login");
-        }
-        
-        if (session.getAttribute("records") == null)
-        {
-            response.sendRedirect("RecordServlet");
         }
         
         Records records = new Records();
@@ -32,14 +36,7 @@
         ArrayList<String> streakStart = records.getStreakStart();
         ArrayList<String> streakEnd = records.getStreakEnd();
         ArrayList<Integer> days = records.getDays();
-        ArrayList<Boolean> isHours = records.getIsHours();
-        
-        System.out.println("The size of attempts is: " +  attempts.size());
-        System.out.println("The size of start streak is: " + streakStart.size());
-        System.out.println("The size of end streak is: " + streakEnd.size());
-        System.out.println("The size of days is: " + days.size());
-        System.out.println("The size of days is: " + isHours.size());
-        
+        ArrayList<Boolean> isHours = records.getIsHours();       
     %>
     
     <div id="page-wrapper">
@@ -93,9 +90,6 @@
                 { 
                     String streak = days.get(i) + "";
                     String endStreak = streakEnd.get(i);
-
-                    System.out.print("The current streak is: " + Streak.getCurrentStreak());
-                    System.out.print("Is it hours: " + Streak.isHour());
                     
                     if (endStreak == null) 
                     {

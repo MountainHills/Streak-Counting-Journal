@@ -79,7 +79,6 @@ public class EndStreakServlet extends HttpServlet {
 
             pstmtNewStreak.executeUpdate();
 
-            con.close();
             response.sendRedirect("StreakServlet");
         }  
         catch (Exception e)
