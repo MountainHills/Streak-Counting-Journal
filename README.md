@@ -43,6 +43,8 @@ TODO: Add pictures of the project once finished.
 ### What I learned
 
 TODO: Fill this section once the project is finished.
+- I made my records incorrectly. I made them static instead of creating their own instance.
+- I won't be able to write code for a while. My Laptop broke.
 
 ### Continued development
 
