@@ -25,8 +25,10 @@ This project was made without the use of frameworks as to better understand how 
 ### Screenshot
 
 TODO: Add pictures of the project once finished.
-
 ## My process
+- Before executing or coding the logic of my program, I first think of pseudocode that will guide so I will only prioritize optimization.
+- I also used test classes to test logic that I'm unsure of. An example of this would be relating to TIMEUNITS and DURATION classes.
+- Before finalizing queries for PreparedStatements, I tested it first in proper SQL to check whether the query I did would give the results that I want.
 
 ### Built with
 
@@ -60,6 +62,7 @@ TODO: Add pictures of the project once finished.
 - A better understanding of CSS could improve the responsiveness of the application.
 - Improvement in design if possible. Making it a more user-friendly and pleasing to the eyes.
 - Use a framework to spend less time rather than reinventing the wheel repeatedly. 
+- I intend to use proper unit tests for faster testing. I made the mistake of re-running the program for every test thus taking too much time in the process.
 
 I had a lot of great experiences and learning opportunities in the making of this project. I'm looking forward to the next one.
 
