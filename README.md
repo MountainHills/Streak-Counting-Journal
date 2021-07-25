@@ -29,6 +29,9 @@ TODO: Add pictures of the project once finished.
 - Before executing or coding the logic of my program, I first think of pseudocode that will guide so I will only prioritize optimization.
 - I also used test classes to test logic that I'm unsure of. An example of this would be relating to TIMEUNITS and DURATION classes.
 - Before finalizing queries for PreparedStatements, I tested it first in proper SQL to check whether the query I did would give the results that I want.
+- I searched through books and other web resources to look for concepts I forgot or don't know.
+- Exception Handling comes last. I made exception pages to easily show where the user made the error.
+
 
 ### Built with
 
