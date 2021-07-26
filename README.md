@@ -40,7 +40,7 @@ TODO: Add pictures of the project once finished.
 - JavaScript
 - JQuery
 - JSP
-- JDBC
+- JDBC/SQL
 - Servlet
 - Apache POI
 - SimpleCAPTCHA
