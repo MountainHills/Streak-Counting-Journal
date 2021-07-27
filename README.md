@@ -1,8 +1,6 @@
 # NoFap Journal
 
-This system will show the user what their progress through streaks. It will record each streak attempt and the display the number of days and the exact time of the streak.
-
-This is a passion project dedicated to those who are trying to overcome their addictions most especially pornography. You inspire me, no matter the struggles, to be a better person.
+This project is dedicated to those who are fighting their demons, especially addiction, regardless of their circumstance. I appreciate and admire those who always strive to be a better person no matter how slow and ardurous it might seem. I will always cheer for the person who really puts in the effort to make themselves better for themselves and to others. 
 
 ## Table of contents
 
@@ -20,13 +18,20 @@ This is a passion project dedicated to those who are trying to overcome their ad
 
 ### Description
 
-A short addiction journal without the use of frameworks. As of creating this journal, I haven't learned or made projects using a MVC Framework. I built the journal from scratch taking up more time that I wanted it to.
+This project is a simple addiction journal. The journal would display the streak of days where the user remained sober for their demons.
+
+This project was made without the use of frameworks as to better understand how each component interacts with another. I have yet to learn and built with a proper framework that would speed up the creation of this project.
 
 ### Screenshot
 
 TODO: Add pictures of the project once finished.
-
 ## My process
+- Before executing or coding the logic of my program, I first think of pseudocode that will guide so I will only prioritize optimization.
+- I also used test classes to test logic that I'm unsure of. An example of this would be relating to TIMEUNITS and DURATION classes.
+- Before finalizing queries for PreparedStatements, I tested it first in proper SQL to check whether the query I did would give the results that I want.
+- I searched through books and other web resources to look for concepts I forgot or don't know.
+- Exception Handling comes last. I made exception pages to easily show where the user made the error.
+
 
 ### Built with
 
@@ -35,22 +40,32 @@ TODO: Add pictures of the project once finished.
 - JavaScript
 - JQuery
 - JSP
-- JDBC
+- JDBC/SQL
 - Servlet
 - Apache POI
 - SimpleCAPTCHA
 
 ### What I learned
 
-TODO: Fill this section once the project is finished.
+- Learned more about starting keywords like static.
+- Learned more about how objects interact with each other.
+- Polished my understanding of the basics of Java
+- Increased the speed of my debugging by providing tests
+- I learned that I made efficient code. I have yet to optimize and refactor it.
+- I made the mistake of not placing proper coments to my code. When I came back after short break, I was confused where to start.
+- I made my records incorrectly. I made them static instead of creating their own instance.
 
 ### Continued development
 
-The app should be planned more. I should've created a simpler code prototype version first, then commit to a full blown project.
-
-TODO: Fill this section once the project is finished. List down key areas you want to work on with your future projects.
-
-I would add additional features to the same application, however I wouldn't do it this time. I would like to make use of a framework so I could spend less time reinventing the wheel. It's not a good practice to make something from sticks when an already robust set of instructions are already made and optimized.
+- The app should be planned more. I should've created a simpler code prototype version first, then commit to a full blown project.
+- An additional reflection page could be added. It's a more active approach to reflect about streaks rather than numbers alone.
+- Proper pop-ups or warnings would be greatly appreciated instead of using linking to other pages when errors occur.
+- Keeping the login and registration in the same page would give a better experience.
+- A CSV file is better than Excel file, so it can support other OS.
+- A better understanding of CSS could improve the responsiveness of the application.
+- Improvement in design if possible. Making it a more user-friendly and pleasing to the eyes.
+- Use a framework to spend less time rather than reinventing the wheel repeatedly. 
+- I intend to use proper unit tests for faster testing. I made the mistake of re-running the program for every test thus taking too much time in the process.
 
 I had a lot of great experiences and learning opportunities in the making of this project. I'm looking forward to the next one.
 
