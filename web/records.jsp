@@ -66,8 +66,7 @@
             <div class="menu-pages">
                 <img class="icons" src="icons/download-xls.png" alt="Download Icon"> 
                 <p>Download Records</p>
-                <!-- TODO: Make an XLS file. -->
-                <a href="https://www.google.com">
+                <a href="<%= request.getContextPath() %>/DownloadServlet">
                     <span class="link-spanner"></span>
                 </a>
             </div>

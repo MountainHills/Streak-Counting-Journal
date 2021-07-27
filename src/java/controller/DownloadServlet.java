@@ -11,6 +11,7 @@
 package controller;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,7 +41,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 @WebServlet(name = "DownloadServlet", urlPatterns = {"/DownloadServlet"})
 public class DownloadServlet extends HttpServlet {
     
-    static Connection con;
+    Connection con;
     
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -50,84 +51,143 @@ public class DownloadServlet extends HttpServlet {
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
             // This is the MIME type for XLS file.
             response.setContentType("application/vnd.ms-excel");
            
             HttpSession session = request.getSession();
             int userIndex = Integer.parseInt(session.getAttribute("userIndex").toString());
             
-            // Checks whether the record count has values.
-            int recordCount = getRecordCount(userIndex);
-            
-            // If there are no values go to error page.
-            if (recordCount == 0) throw new NullPointerException();
-            
-            // Place the values here.
+            // These are the headers for the XLS file.
             final String[] titles = {"Attempt #", "Start of Streak", "End of Streak", "Time", "Time Value"};
+            
             // Gets the values from the database.
-            ResultSet records = getDatabaseRecords(userIndex);
+            String query =  "SELECT ATTEMPT, START_STREAK, END_STREAK, DAYS, IS_HOURS\n" +
+                "FROM RECORDS\n" +
+                "WHERE USER_ID = " + userIndex + "AND END_STREAK IS NOT NULL\n" +
+                "ORDER BY ATTEMPT";
             
-            try (Workbook wb = new HSSFWorkbook())
+            try (PreparedStatement pstmtRecords = con.prepareStatement(query)) 
             {
-                // Creates the sheet of the workbook.
-                Sheet sheet = wb.createSheet("NoFap Records");
+                ResultSet records = pstmtRecords.executeQuery();
+                System.out.println("FINISHED creating the result set for the XLS file!");
                 
-                // Creating the header row.
-                Row headerRow = sheet.createRow(0);
+                // If the records is empty.
+                if (!records.next()) throw new SQLException();
+                System.out.println("FINISHED checking if the records is empty.");
                 
-                for (int i = 0; i < titles.length; i++) 
+                try (Workbook wb = new HSSFWorkbook())
                 {
-                    Cell headerCell = headerRow.createCell(i);
-                    headerCell.setCellValue(titles[i]);
-                    sheet.autoSizeColumn(i);
-                }
-                
-                // Freeze the first row
-                sheet.createFreezePane(0, 1);
-                
-                // Inserts the values of the records to the sheet.
-                Row row;
-                Cell cell;
-                
-                // Gets the a new row.
-                int rownum = sheet.getLastRowNum() + 1;
-                
-                // Insertion Loop.
-                for (int i = 0; i < recordCount; i++, rownum++)
-                {
-                    row = sheet.createRow(rownum);
+                    response.setHeader("Content-disposition", "attachment; filename=NoFapRecords.xls");
+                    System.out.println("INITIALIZED workbook and set the header.");
                     
-                    for (int j = 0; j < titles.length; j++)
+                    // Creates the sheet of the workbook.
+                    Sheet sheet = wb.createSheet("NoFap Records");
+                    System.out.println("INITIALIZED sheet: NoFap Records.");
+
+                    // Creates the styles for the cells;
+                    Map<String, CellStyle> styles = createStyles(wb);
+                    System.out.println("INITIALIZED cell styles.");
+                    
+                    // Creating the header row.
+                    Row headerRow = sheet.createRow(0);
+
+                    for (int i = 0; i < titles.length; i++) 
                     {
-                        cell = row.createCell(j);
-                        
-                        switch(j)
-                        {
-                            case 1:
-                            {
-                                   
-                            };
-                            case 2:;
-                            case 3:;
-                            case 4:;
-                            case 5:;
-                        }
+                        Cell headerCell = headerRow.createCell(i);
+                        headerCell.setCellValue(titles[i]);
+                        headerCell.setCellStyle(styles.get("header"));
                     }
+                    System.out.println("FINISHED creating the header cells");
+
+                    // Freeze the first row
+                    sheet.createFreezePane(0, 1);
+                    System.out.println("FINISHED Freezing the header row");
+
+                    // Inserts the values of the records to the sheet.
+                    Row row;
+                    Cell cell;
+
+                    // Gets the a new row.
+                    int rownum = sheet.getLastRowNum() + 1;
+
+                    // Insertion Loop. Do while loop is used since rs.next() was used at the beginning to determine if the record was empty.
+                    do
+                    {
+                        row = sheet.createRow(rownum);
+                        
+                        for (int i = 0; i < titles.length; i++)
+                        {
+                            cell = row.createCell(i);
+
+                            // Places the values under respective columns.
+                            switch(i)
+                            {
+                                case 0:
+                                {
+                                    cell.setCellValue(records.getInt("ATTEMPT"));
+                                    break;
+                                }
+                                case 1:
+                                {
+                                    cell.setCellValue(records.getString("START_STREAK"));
+                                    break;
+                                }
+                                case 2:
+                                {
+                                    cell.setCellValue(records.getString("END_STREAK"));
+                                    break;
+                                }
+                                case 3:
+                                {
+                                    cell.setCellValue(records.getInt("DAYS"));
+                                    break;
+                                }
+                                case 4:
+                                {
+                                    cell.setCellValue(records.getBoolean("IS_HOURS"));
+                                    break;
+                                }
+                            }
+                            
+                            cell.setCellStyle(styles.get("normal"));
+                        }
+                        rownum++;
+                        
+                    } while (records.next());
+                            
+                    System.out.println("FINISHED placing all the records of the database in their respective ROWS.");
+                    
+                    // Readjusts the columns.
+                    for (int i = 0; i < titles.length; i++)
+                    {
+                        sheet.autoSizeColumn(i);
+                    }
+                    System.out.println("FINISHED adjusting Columns");
+                    
+                    // Creates the file.
+                    wb.write(response.getOutputStream());
+                    wb.close();
+                    
+                    System.out.println("FINISHED creating the workbook");
+                }
+                catch (FileNotFoundException fnfe)
+                {
+                    fnfe.printStackTrace();
+                }
+                catch (IOException ioe)
+                {
+                    ioe.printStackTrace();
                 }
             }
-            catch (FileNotFoundException fnfe)
+            catch (SQLException sqle) 
             {
-                fnfe.printStackTrace();
+                System.out.println("There is an SQLException error when I was creating the worksheet.");
+                sqle.printStackTrace();
             }
-            catch (IOException ioe)
-            {
-                ioe.printStackTrace();
-            }
-            
     }
     
-    private static ResultSet getDatabaseRecords(int userIndex) throws SQLException
+    private ResultSet getDatabaseRecords(int userIndex) throws SQLException
     {
         String query =  "SELECT ATTEMPT, START_STREAK, END_STREAK, DAYS, IS_HOURS\n" +
                         "FROM RECORDS\n" +
@@ -140,9 +200,15 @@ public class DownloadServlet extends HttpServlet {
             
             return records;
         }
+        catch (SQLException sqle)
+        {
+            sqle.printStackTrace();
+        }
+        
+        return null;
     }
     
-        private static int getRecordCount(int userIndex) throws SQLException
+        private int getRecordCount(int userIndex) throws SQLException
     {
         String query =  "SELECT COUNT(*)\n" +
                         "FROM RECORDS\n" +
@@ -157,11 +223,15 @@ public class DownloadServlet extends HttpServlet {
                 return rs.getInt(1);
             }
         }
+        catch (SQLException sqle)
+        {
+            sqle.printStackTrace();
+        }
         
         return 0;
     }
     
-    private static Map<String, CellStyle> createStyles(Workbook wb)
+    private Map<String, CellStyle> createStyles(Workbook wb)
     {
         Map<String, CellStyle> styles = new HashMap<>();
         
@@ -187,7 +257,7 @@ public class DownloadServlet extends HttpServlet {
         return styles;
     }
         
-    private static CellStyle createBorderedStyle(Workbook wb)
+    private CellStyle createBorderedStyle(Workbook wb)
     {
         BorderStyle thin = BorderStyle.THIN;
         short black = IndexedColors.BLACK.getIndex();
