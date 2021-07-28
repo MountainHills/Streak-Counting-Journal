@@ -10,8 +10,8 @@
 */
 package controller;
 
+import exception.NoCompleteRecordException;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,7 +73,7 @@ public class DownloadServlet extends HttpServlet {
                 System.out.println("FINISHED creating the result set for the XLS file!");
                 
                 // If the records is empty.
-                if (!records.next()) throw new SQLException();
+                if (!records.next()) throw new NoCompleteRecordException();
                 System.out.println("FINISHED checking if the records is empty.");
                 
                 try (Workbook wb = new HSSFWorkbook())
@@ -145,7 +145,15 @@ public class DownloadServlet extends HttpServlet {
                                 }
                                 case 4:
                                 {
-                                    cell.setCellValue(records.getBoolean("IS_HOURS"));
+                                    String timeVal = "Day";
+                                    
+                                    if (records.getBoolean("IS_HOURS"))
+                                    {
+                                        timeVal = "Hour";
+                                    }
+                                    
+                                    cell.setCellValue(timeVal);
+                                    
                                     break;
                                 }
                             }
@@ -206,29 +214,6 @@ public class DownloadServlet extends HttpServlet {
         }
         
         return null;
-    }
-    
-        private int getRecordCount(int userIndex) throws SQLException
-    {
-        String query =  "SELECT COUNT(*)\n" +
-                        "FROM RECORDS\n" +
-                        "WHERE USER_ID = " + userIndex + " AND END_STREAK IS NOT NULL";
-        
-        try (PreparedStatement pstmtRecords = con.prepareStatement(query))
-        {
-            ResultSet rs = pstmtRecords.executeQuery();
-            
-            while (rs.next())
-            {
-                return rs.getInt(1);
-            }
-        }
-        catch (SQLException sqle)
-        {
-            sqle.printStackTrace();
-        }
-        
-        return 0;
     }
     
     private Map<String, CellStyle> createStyles(Workbook wb)

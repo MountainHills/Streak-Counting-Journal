@@ -23,34 +23,6 @@
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>controller.RegisterServlet</servlet-class>
-        <init-param>
-            <param-name>jdbcClassName</param-name>
-            <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbUserName</param-name>
-            <param-value>app</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbPassword</param-name>
-            <param-value>app</param-value>
-        </init-param>
-        <init-param>
-            <param-name>jdbcDriverURL</param-name>
-            <param-value>jdbc:derby</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbHostName</param-name>
-            <param-value>localhost</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbPort</param-name>
-            <param-value>1527</param-value>
-        </init-param>
-        <init-param>
-            <param-name>databaseName</param-name>
-            <param-value>NoFapJournalDB</param-value>
-        </init-param>
     </servlet>
     <servlet>
         <servlet-name>SimpleCaptchaServlet</servlet-name>
@@ -124,4 +96,31 @@
     <welcome-file-list>
         <welcome-file>login</welcome-file>
     </welcome-file-list>
+    <error-page>
+    <error-code>404</error-code>
+    <location>/error/Error404.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>exception.IncorrectCaptchaException</exception-type>
+        <location>/error/IncorrectCAPTCHAException.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>exception.IncorrectPasswordsException</exception-type>
+        <location>/error/IncorrectPasswords.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>exception.IncorrectCredentialsException</exception-type>
+        <location>/error/IncorrectCredentials.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>exception.NotUniqueUsernameException</exception-type>
+        <location>/error/NotUniqueUsernameException.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>exception.NoCompleteRecordException</exception-type>
+        <location>/error/NoCompleteRecord.jsp</location>
+    </error-page>
 </web-app>

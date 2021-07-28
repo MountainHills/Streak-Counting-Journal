@@ -1,5 +1,6 @@
 package controller;
 
+import exception.IncorrectCredentialsException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,9 +57,6 @@ public class LoginServlet extends HttpServlet {
             sqle.printStackTrace();
         } 
         
-        // TODO: Error Handling: If username and passwords are empty from login.jsp
-        // TODO: Check whether the connection is null. If the connection is null don't proceed below.
-        
         // Encrypted password from login.jsp to compare to the database.
         password = Security.encrypt(password);
         
@@ -82,14 +80,12 @@ public class LoginServlet extends HttpServlet {
             }
             else
             {
-                response.sendRedirect("login");
-                // TODO: The password is incorrect error handling.
+                throw new IncorrectCredentialsException();
             }
         }
         else 
         {
-            response.sendRedirect("login");
-            // TODO: The username doesn't exist error handling.
+            throw new IncorrectCredentialsException();
         }  
     }
     

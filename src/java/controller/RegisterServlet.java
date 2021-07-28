@@ -1,5 +1,6 @@
 package controller;
 
+import exception.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,16 +32,8 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("passwordRegister");
         String confirmPassword = request.getParameter("confirmPassword");
         
-        // Checks whether the parameters are all filled.
-        if (username.equals("") || password.equals("") || confirmPassword.equals(""))
-        {
-            // TODO: Create an error handling page for empty forms.
-            System.out.println("Enter complete parameters.");
-        }
-        
-        // TODO: Create an error handling page for empty forms.
-        // Check if password and confirmPassword matches
-        if (!password.equals(confirmPassword)) throw new IOException();
+        // Check if password and confirmPassword matches (CREATE ERROR PAGE)
+        if (!password.equals(confirmPassword)) throw new IncorrectPasswordsException();
         
         // Declare variables to check the record size.
         int recordSize = 1;
@@ -66,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
             }
             
             // Checks the username from register.jsp if it is unique.
-            if (usernameList.contains(username)) throw new NullPointerException();
+            if (usernameList.contains(username)) throw new NotUniqueUsernameException();
             
             pstmtUsernames.close();
             pstmtUserRecords.close();
@@ -111,8 +104,7 @@ public class RegisterServlet extends HttpServlet {
             }
         }
         else {
-            // TODO: Create error handling for incorrect CAPTCHA.
-            System.out.println("Incorrect CAPTCHA. Try again.");
+            throw new IncorrectCaptchaException();
         }
     }
 

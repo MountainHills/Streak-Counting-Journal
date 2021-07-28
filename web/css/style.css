@@ -250,7 +250,7 @@ hr {
 
 .button-start-end {
     margin-top: 30px;
-    width: 100%;
+    width: 80%;
     background-color: var(--menu-odd-color);
 }
 
@@ -258,4 +258,20 @@ hr {
 
 td, th {
     text-align: center;
+}
+
+/* CSS for Error Pages */
+#error-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #444444;
+    font-size: 24px;
+    flex-direction: column;
+    line-height: 1.6rem;
+}
+
+#button-container {
+    width: 20%;
 }

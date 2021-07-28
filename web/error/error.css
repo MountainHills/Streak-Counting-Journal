@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Kufam:wght@500&family=Lato:wght@700&display=swap');
+
+:root {
+    --header-color: #DA0037;
+    --menu-odd-color: #444444;
+    --menu-even-color: #171717;
+    --paragraph-color: #EDEDED;
+    --content-container-color: #F0F2F5;
+    --form-color: #F8E4E2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Lato, Helvetica, sans-serif;
+    font-size: 16px;
+    color: var(--paragraph-color);
+    background-color: var(--content-container-color);
+}
+
+.button {
+    background-color: var(--menu-even-color);
+    width: 85%;
+    border: none;
+    color: white;
+    padding: 15px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#error-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #444444;
+    font-size: 24px;
+    flex-direction: column;
+    line-height: 1.6rem;
+}
+
+#button-container {
+    width: 20%;
+}
