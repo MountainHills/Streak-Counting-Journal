@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css"/>
      <link rel="icon" href="icon_path" type="image/icon type">
     <title>Index Page for Web Application</title>
 </head>
@@ -41,6 +41,7 @@
 
         <!-- Header -->
         <header>
+            <p><% out.print(session.getAttribute("user")); %></p>
             <p></p>
             <p><a href="<%= request.getContextPath() %>/LogoutServlet">Logout</a></p>
         </header>

@@ -6,8 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <!-- TODO: Create Web App Logo -->
+    <link href="<%= request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css"/>
     <title>Index Page for Web Application</title>
 </head>
 <body>
@@ -43,6 +42,7 @@
 
         <!-- Header -->
         <header>
+            <p><% out.print(session.getAttribute("user")); %></p>
             <p></p>
             <p><a href="<%= request.getContextPath() %>/LogoutServlet">Logout</a></p>
         </header>

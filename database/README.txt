@@ -1,0 +1,1 @@
+The DATABASE NAME should be: NoFapJournalDB

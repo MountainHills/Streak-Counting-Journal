@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <link href="/error.css" rel="stylesheet" type="text/css"/>
+    <link href="<%= request.getContextPath() %>/error/error.css" rel="stylesheet" type="text/css"/>
      <link rel="icon" href="icon_path" type="image/icon type">
     <title>NoFAP Journal</title>
 </head>

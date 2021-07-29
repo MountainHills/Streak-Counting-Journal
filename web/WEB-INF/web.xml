@@ -103,7 +103,7 @@
 
     <error-page>
         <exception-type>exception.IncorrectCaptchaException</exception-type>
-        <location>/error/IncorrectCAPTCHAException.jsp</location>
+        <location>/error/IncorrectCAPTCHA.jsp</location>
     </error-page>
 
     <error-page>
@@ -117,7 +117,7 @@
     </error-page>
     <error-page>
         <exception-type>exception.NotUniqueUsernameException</exception-type>
-        <location>/error/NotUniqueUsernameException.jsp</location>
+        <location>/error/NotUniqueUsername.jsp</location>
     </error-page>
     <error-page>
         <exception-type>exception.NoCompleteRecordException</exception-type>
