@@ -22,9 +22,56 @@ This project is a simple addiction journal. The journal would display the streak
 
 This project was made without the use of frameworks as to better understand how each component interacts with another. I have yet to learn and built with a proper framework that would speed up the creation of this project.
 
-### Screenshot
+### Screenshots
+<p align="center">
+  <img width="80%" src="https://raw.githubusercontent.com/MountainHills/NoFap-Journal/main/docs/images/LoginPage.png" alt="Login Page">
+  <p align="center">The Login Page<p>
+  <br>
+</p>
 
-TODO: Add pictures of the project once finished.
+<p align="center">
+  <img width="80%" src="https://raw.githubusercontent.com/MountainHills/NoFap-Journal/main/docs/images/RegistrationPage.png" alt="Registration Page">
+  <p align="center">The Registration Page<p>
+  <br>
+</p>
+
+<p align="center">
+  <img width="80%" src="https://raw.githubusercontent.com/MountainHills/NoFap-Journal/main/docs/images/SuccessfulLoginNewUser.png" alt="New Logged In User">
+  <p align="center">Example of a New Logged In Account<p>
+  <br>
+</p>
+
+<p align="center">
+  <img width="80%" src="https://raw.githubusercontent.com/MountainHills/NoFap-Journal/main/docs/images/SuccessfulLoginNewUserWithBestRecord.png" alt="Logged In User with a completed record">
+  <p align="center">Example of a New Logged In Account with a completed Streak. Notice the user already has a best record<p>
+  <br>
+</p>
+
+<p align="center">
+  <img width="80%" src="https://raw.githubusercontent.com/MountainHills/NoFap-Journal/main/docs/images/RecordsPage.png" alt="Records Page">
+  <p align="center">The Records Page<p>
+  <br>
+</p>
+
+<p align="center">
+  <img width="80%" src="https://raw.githubusercontent.com/MountainHills/NoFap-Journal/main/docs/images/DownloadRecords.png" alt="Download Record prompt">
+  <p align="center">The Download Prompt when the 'Download Records' menu is pressed<p>
+  <br>
+</p>
+
+<p align="center">
+  <img width="50%" src="https://raw.githubusercontent.com/MountainHills/NoFap-Journal/main/docs/images/DownloadedRecordSingleRecord.png" alt="Single Record">
+  <p align="center">An Excel file with a single Record<p>
+  <br>
+</p>
+
+<p align="center">
+  <img width="50%" src="https://raw.githubusercontent.com/MountainHills/NoFap-Journal/main/docs/images/DownloadedRecordMultipleRecords.png" alt="Multiple Records">
+  <p align="center">An Excel file with multiple records<p>
+</p>
+
+
+
 ## My process
 - Before executing or coding the logic of my program, I first think of pseudocode that will guide so I will only prioritize optimization.
 - I also used test classes to test logic that I'm unsure of. An example of this would be relating to TIMEUNITS and DURATION classes.
@@ -37,7 +84,6 @@ TODO: Add pictures of the project once finished.
 
 - HTML
 - CSS
-- JavaScript
 - JQuery
 - JSP
 - JDBC/SQL
@@ -71,7 +117,14 @@ I had a lot of great experiences and learning opportunities in the making of thi
 
 ### Useful resources
 
-TODO: Fill this section up with links and resources that helped you create this project. It will also be helpful for future projects as well. List down the reason why it helped you too!
+- [Video abouut the full features of Bootstrap tables.](https://www.youtube.com/watch?v=yGBk9Nalyq8&t=1s)
+- [Link used to make the database records table](https://www.datatables.net/)
+- [Cleaner algorithm for ResultSet to ArrayList/List](https://stackoverflow.com/questions/35535856/resultset-to-array)
+- [Database connection to a different class idea](https://kkjavatutorials.com/how-to-retrieve-data-from-jdbc-resultset-in-java/)
+- [Session Management: Login and Logout](https://www.youtube.com/watch?v=cYc3FjhMMzI)
+- [More Session Management; Clearing Cache](https://www.youtube.com/watch?v=gQLQ0t9B5yk)
+- [How to Navigate ResultSet](https://stackoverflow.com/questions/10298794/resultset-getstring1-throws-java-sql-sqlexception-invalid-operation-at-curren)
+- [MS Excel MIME Types](https://stackoverflow.com/questions/974079/setting-mime-type-for-excel-document)
 
 ## Author
 
